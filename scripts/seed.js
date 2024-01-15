@@ -1,4 +1,4 @@
-const { db } = require('@vercel/postgres');
+import { Client } from 'ts-postgres';
 const {
   invoices,
   customers,
@@ -161,7 +161,8 @@ async function seedRevenue(client) {
 }
 
 async function main() {
-  const client = await db.connect();
+  const client = new Client({});
+  await client.connect();
 
   await seedUsers(client);
   await seedCustomers(client);
